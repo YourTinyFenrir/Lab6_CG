@@ -6,7 +6,7 @@ Cube::Cube() {
 
 Cube::Cube(float a) {
 
-    // Задаем значения, начиная с ближней верхней левой вершины, сначала по часовой верхнюю грань
+    // Задаем значения, начиная с ближней нижней левой вершины, сначала по часовой верхнюю грань
     // Затем в том же порядке нижнюю грань
     vertex.push_back(QVector4D(0, 0, 0, 1));
     vertex.push_back(QVector4D(0, 0, a, 1));
@@ -16,7 +16,13 @@ Cube::Cube(float a) {
     vertex.push_back(QVector4D(0, a, a, 1));
     vertex.push_back(QVector4D(a, a, a, 1));
     vertex.push_back(QVector4D(a, a, 0, 1));
-
+    // Для векторов нормали
+    vertex.push_back(QVector4D(0, 0, 1, 1));
+    vertex.push_back(QVector4D(0, 0, 1, 1));
+    vertex.push_back(QVector4D(0, 1, 0, 1));
+    vertex.push_back(QVector4D(0, 1, 0, 1));
+    vertex.push_back(QVector4D(-1, 0, 0, 1));
+    vertex.push_back(QVector4D(-1, 0, 0, 1));
 }
 
 Cube::Cube(QVector<QVector4D> pts) {
@@ -33,6 +39,7 @@ void Cube::draw() {
    temp.push_back(vertex[3]);
    temp.push_back(vertex[7]);
    temp.push_back(vertex[4]);
+   temp.push_back(vertex[9]);
 
    Square front(temp);
 
@@ -41,6 +48,7 @@ void Cube::draw() {
    temp.push_back(vertex[2]);
    temp.push_back(vertex[6]);
    temp.push_back(vertex[5]);
+   temp.push_back(vertex[8]);
 
    Square back(temp);
 
@@ -49,6 +57,7 @@ void Cube::draw() {
    temp.push_back(vertex[2]);
    temp.push_back(vertex[3]);
    temp.push_back(vertex[0]);
+   temp.push_back(vertex[11]);
 
    Square top(temp);
 
@@ -57,6 +66,7 @@ void Cube::draw() {
    temp.push_back(vertex[6]);
    temp.push_back(vertex[7]);
    temp.push_back(vertex[4]);
+   temp.push_back(vertex[10]);
 
    Square bottom(temp);
 
@@ -65,6 +75,7 @@ void Cube::draw() {
    temp.push_back(vertex[1]);
    temp.push_back(vertex[5]);
    temp.push_back(vertex[4]);
+   temp.push_back(vertex[13]);
 
    Square left(temp);
 
@@ -73,6 +84,7 @@ void Cube::draw() {
    temp.push_back(vertex[2]);
    temp.push_back(vertex[6]);
    temp.push_back(vertex[7]);
+   temp.push_back(vertex[12]);
 
    Square right(temp);
 
@@ -105,19 +117,19 @@ void Cube::draw() {
            front.draw(1, 0, 0); // Красный
            break;
        case 1:
-           back.draw(0.5, 0, 0); // Темнокрасный
+           back.draw(1, 0, 0);
            break;
        case 2:
            top.draw(0, 0, 1); // Синий
            break;
        case 3:
-           bottom.draw(0, 0, 0.5); // Темносиний
+           bottom.draw(0, 0, 1);
            break;
        case 4:
            left.draw(0, 1, 0); // Зеленый
            break;
        case 5:
-           right.draw(0, 0.5, 0); // Темнозеленый
+           right.draw(0, 1, 0);
            break;
 
        }

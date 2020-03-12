@@ -23,11 +23,10 @@ void GLScene::setAngleOY(float angle) {
 
 void GLScene::initializeGL() {
 
-    glClearColor(1, 1, 1, 0); // задаем фон окна
+    glClearColor(0, 0, 0, 0); // задаем фон окна
     glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
     glEnable(GL_LIGHTING); // расчет освещения
-    //glEnable(GL_NORMALIZE);
-    glShadeModel(GL_FLAT);
+    glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
     glDepthFunc(GL_LEQUAL);
 
 }
@@ -37,6 +36,10 @@ void GLScene::resizeGL(int w, int h) {
     glViewport(0, 0, h, h); // установка точки обзора
     glMatrixMode(GL_PROJECTION); // установка режима матрицы
     glLoadIdentity(); // загрузка матрицы
+    glOrtho(-1, 1, -1, 1, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+
+    glLoadIdentity();
 
 }
 
@@ -49,7 +52,7 @@ void GLScene::paintGL() {
     // точечный источник света
     // убывание интенсивности с расстоянием
     // задано функцией f(d) = 1.0 / (0.4 * d * d + 0.2 * d)
-    GLfloat light_position[] = {0, 0, -1, 1};
+    GLfloat light_position[] = {0, 0, 2, 1};
 
     glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
@@ -64,10 +67,12 @@ void GLScene::paintGL() {
         glVertex3f(0, 1, 0);
         glVertex3f(-1, 0, 0);
         glVertex3f(1, 0, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(1, 1, -1);
 
     glEnd();
 
-    if (angleOX == 0 && angleOY == 0) {
+    if (angleOX == -1 && angleOY == -1) {
 
         Cube defCube(0.5);
         cube = defCube;

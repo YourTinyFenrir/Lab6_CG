@@ -18,8 +18,8 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_createCube_clicked() {
 
-    scene.setAngleOX(0);
-    scene.setAngleOY(0);
+    scene.setAngleOX(-1);
+    scene.setAngleOY(-1);
     scene.repaint();
 
 }

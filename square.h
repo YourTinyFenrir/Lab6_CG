@@ -10,7 +10,7 @@
 class Square {
 
 private:
-    QVector<QVector4D> vertex; // Вершины, нумерация с левой верхней по часовой стрелке
+    QVector<QVector4D> vertex; // Вершины, нумерация с левой верхней по часовой стрелке, последняя - для вектора нормали
     float centerZ; // Координата Z центра квадрата
 public:
     Square();

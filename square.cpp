@@ -29,12 +29,12 @@ void Square::draw(float r, float g, float b) {
     GLfloat color[] = {r, g, b, 1};
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
 
-    glBegin(GL_POLYGON);
+    glBegin(GL_QUADS);
 
-    /*QVector4D normal = vertex[vertex.size() - 1];
-    glNormal3f(normal.x(), normal.y(), normal.z());*/
+    QVector4D normal = vertex[vertex.size() - 1];
+    glNormal3f(normal.x(), normal.y(), normal.z());
 
-    for (int i = 0; i < vertex.size(); ++i)
+    for (int i = 0; i < vertex.size() - 1; ++i)
         glVertex3f(vertex[i].x(), vertex[i].y(), vertex[i].z());
 
     glEnd();
